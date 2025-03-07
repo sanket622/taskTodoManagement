@@ -3,13 +3,16 @@ import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    name: { type: String, required: true, index: true }, // Index for faster searches
+    email: { type: String, required: true, unique: true, index: true }, // Unique index for email
     password: { type: String, required: true },
-    role: { type: String, enum: ['Admin', 'User'], default: 'User' }
+    role: { type: String, enum: ['Admin', 'User'], default: 'User', index: true } // Index for role-based queries
   },
   { timestamps: true }
 );
+
+// Compound index for frequent queries (e.g., authentication)
+userSchema.index({ email: 1, role: 1 });
 
 // Pre-save middleware to hash password before saving a new user
 userSchema.pre('save', async function (next) {

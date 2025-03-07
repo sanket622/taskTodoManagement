@@ -28,21 +28,18 @@ export const createTask = async (req, res) => {
 
 
 export const getTasks = async (req, res) => {
-  try {
-    console.log('User making request:', req.user);
-    const userId = req.user._id.toString(); 
-    console.log('User ID:', userId);
-    const tasks =
-      req.user.role === 'admin'
-        ? await Task.find()
-        : await Task.find({ assignedTo:userId  });
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
 
-    console.log('Tasks fetched:', tasks);
-    res.json(tasks);
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error', error: error.message });
-  }
+  const tasks = await Task.find({ assignedTo: req.user._id })
+    .skip(skip)
+    .limit(limit)
+    .sort({ createdAt: -1 });
+
+  res.json(tasks);
 };
+
 
 
 export const updateTask = async (req, res) => {

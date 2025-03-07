@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import { body, validationResult } from 'express-validator';
 
 export const protect = async (req, res, next) => {
   let token;
@@ -32,4 +33,49 @@ export const authorize = (roles) => {
     next();
   };
 };
+
+export const validateRegistration = [
+  body('name')
+    .trim()
+    .escape()
+    .notEmpty()
+    .withMessage('Name is required'),
+
+  body('email')
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('Valid email is required'),
+
+  body('password')
+    .isLength({ min: 6 })
+    .withMessage('Password must be at least 6 characters long'),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  }
+];
+
+export const validateLogin = [
+  body('email')
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('Valid email is required'),
+
+  body('password')
+    .notEmpty()
+    .withMessage('Password is required'),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  }
+];
+
 
