@@ -1,18 +1,31 @@
 import Notification from '../models/Notification.js';
 import Task from '../models/Task.js';
+import Log from '../models/Log.js';
 
 const sendNotification = async (userId, message) => {
   await new Notification({ user: userId, message }).save();
 };
 
+const logAction = async (userId, taskId, action, details = {}) => {
+  try {
+    await Log.create({ user: userId, task: taskId, action, details });
+  } catch (error) {
+    console.error('Logging error:', error);
+  }
+};
+
 export const createTask = async (req, res) => {
   try {
     const task = await Task.create({ ...req.body, createdBy: req.user.id });
+
+    await logAction(req.user.id, task._id, 'CREATE_TASK', { title: task.title });
+
     res.status(201).json(task);
   } catch (error) {
     res.status(500).json({ message: "Server Error", error: error.message });
   }
 };
+
 
 export const getTasks = async (req, res) => {
   try {
@@ -34,33 +47,32 @@ export const getTasks = async (req, res) => {
 
 export const updateTask = async (req, res) => {
   try {
-    const task = await Task.findById(req.params['id']);
+    const task = await Task.findById(req.params.id);
     if (!task) {
       return res.status(404).json({ message: "Task not found" });
     }
-    
-    console.log(req.user.role);
-    
-    // Check if the user is an admin or the owner of the task
-    if (req.user.role !== 'Admin' && 'User' && task.assignedTo.toString() !== req.user.id) {
+
+    if (req.user.role !== 'admin' && task.assignedTo.toString() !== req.user.id) {
       return res.status(403).json({ message: "Unauthorized" });
     }
-    
-    // Allow only status updates for non-admin users
-    
-    if (req.user.role !== 'admin' && req.body.status) {
-      task.status = req.body.status;
-    } else {
-      Object.assign(task, req.body);
-    }
-    
+
+    const updatedFields = Object.keys(req.body).reduce((changes, field) => {
+      if (task[field] !== req.body[field]) {
+        changes[field] = { old: task[field], new: req.body[field] };
+      }
+      return changes;
+    }, {});
+
+    Object.assign(task, req.body);
     await task.save();
+
+    await logAction(req.user.id, task._id, 'UPDATE_TASK', updatedFields);
+
     res.json(task);
   } catch (error) {
     res.status(500).json({ message: "Server Error", error: error.message });
   }
 };
-
 
 export const deleteTask = async (req, res) => {
   try {
@@ -68,6 +80,9 @@ export const deleteTask = async (req, res) => {
     if (!task || (req.user.role !== 'admin' && task.assignedTo.toString() !== req.user.id)) {
       return res.status(403).json({ message: "Unauthorized" });
     }
+
+    await logAction(req.user.id, task._id, 'DELETE_TASK', { title: task.title });
+
     await task.deleteOne();
     res.json({ message: "Task deleted" });
   } catch (error) {
@@ -88,5 +103,14 @@ export const assignTask = async (req, res) => {
     res.json(task);
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
+  }
+};
+
+export const getLogs = async (req, res) => {
+  try {
+    const logs = await Log.find().populate('user', 'name email').populate('task', 'title');
+    res.json(logs);
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error: error.message });
   }
 };
