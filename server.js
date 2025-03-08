@@ -2,10 +2,10 @@ import express from 'express';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-import connectDB from './config/db.js';
-import authRoutes from './routes/authRoutes.js';
-import taskRoutes from './routes/taskRoutes.js';
-import notificationRoutes from './routes/notificationRoutes.js'
+import connectDB from './src/config/db.js';
+import authRoutes from './src/routes/authRoutes.js';
+import taskRoutes from './src/routes/taskRoutes.js';
+import notificationRoutes from './src/routes/notificationRoutes.js'
 
 
 dotenv.config();
