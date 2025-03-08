@@ -29,6 +29,22 @@ JWT_SECRET=your_secret_key
    ```sh
    npm start
    ```
+## Security and Rate Limiting
+
+# The project uses security best practices by implementing the following packages:
+
+1. dotenv: To manage environment variables.
+
+2. helmet: To secure HTTP headers.
+
+3. express-rate-limit: To prevent excessive API requests.
+
+# These dependencies are imported as follows:
+```sh
+import dotenv from 'dotenv';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+```
 
 ## API Endpoints and Testing in Postman
 
