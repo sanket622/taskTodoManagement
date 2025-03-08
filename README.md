@@ -1,7 +1,5 @@
 # taskTodoManagement
 
-## Getting Started
-
 # Project Setup and API Testing Guide
 
 ## Prerequisites
