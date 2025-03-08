@@ -31,15 +31,15 @@ JWT_SECRET=your_secret_key
    ```
 ## Security and Rate Limiting
 
-# The project uses security best practices by implementing the following packages:
+1. The project uses security best practices by implementing the following packages:
 
-1. dotenv: To manage environment variables.
+- dotenv: To manage environment variables.
 
-2. helmet: To secure HTTP headers.
+- helmet: To secure HTTP headers.
 
-3. express-rate-limit: To prevent excessive API requests.
+- express-rate-limit: To prevent excessive API requests.
 
-# These dependencies are imported as follows:
+2. These dependencies are imported as follows:
 ```sh
 import dotenv from 'dotenv';
 import helmet from 'helmet';
