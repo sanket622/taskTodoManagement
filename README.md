@@ -33,11 +33,11 @@ JWT_SECRET=your_secret_key
 
 - **The project uses security best practices by implementing the following packages:**
 
-- dotenv: To manage environment variables.
+1. dotenv: To manage environment variables.
 
-- helmet: To secure HTTP headers.
+2. helmet: To secure HTTP headers.
 
-- express-rate-limit: To prevent excessive API requests.
+3. express-rate-limit: To prevent excessive API requests.
 
 - **These dependencies are imported as follows:**
 
