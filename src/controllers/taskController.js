@@ -26,7 +26,6 @@ export const createTask = async (req, res) => {
   }
 };
 
-
 export const getTasks = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
@@ -39,8 +38,6 @@ export const getTasks = async (req, res) => {
 
   res.json(tasks);
 };
-
-
 
 export const updateTask = async (req, res) => {
   try {
@@ -89,8 +86,6 @@ export const deleteTask = async (req, res) => {
 
 export const assignTask = async (req, res) => {
   try {
-    console.log(req.params['taskId']);
-    
     const task = await Task.findById(req.params['taskId']);
     
     task.assignedTo = req.body.userId;

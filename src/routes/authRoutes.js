@@ -4,8 +4,10 @@ import { validateLogin, validateRegistration } from '../middleware/authMiddlewar
 
 const router = express.Router();
 
-// Auth Routes
+// @route POST /api/users/register - Register as User Or Admin 
 router.post('/register',validateRegistration , register);
+
+// @route POST /api/users/login - Login as User Or Admin
 router.post('/login', validateLogin,login);
 
 export default router;

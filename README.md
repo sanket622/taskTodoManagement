@@ -29,6 +29,7 @@ JWT_SECRET=your_secret_key
    ```sh
    npm start
    ```
+
 ## Security and Rate Limiting
 
 - **The project uses security best practices by implementing the following packages:**
@@ -84,24 +85,6 @@ import rateLimit from 'express-rate-limit';
   ```
 - **Response:** Similar to register.
 
-### Notifications
-
-#### Get Notifications
-- **Endpoint:** `GET /api/notifications`
-- **Headers:**
-  ```
-  Authorization: Bearer <jwt_token>
-  ```
-- **Response:** List of notifications.
-
-#### Mark Notification as Read
- ```json
-  {
-  "message": "Notification marked as read"
-}
-  ```
-- **Endpoint:** `PUT /api/notifications/:id/read`
-- **Headers:** Same as above.
 
 ### Tasks
 
@@ -148,17 +131,39 @@ import rateLimit from 'express-rate-limit';
 - **Endpoint:** `DELETE /api/tasks/:id`
 - **Headers:** Same as above.
 
-- **Response:** Task Deleted.
+- **Response:** Task deleted.
 
 
 #### Assign Task (After assigning a task by Admin , Users will get a notificatio)
-- **Endpoint:** `POST /api/tasks/:taskId/assign`
+- **Endpoint:** `POST /api/tasks/assign/:taskId`
 - **Headers:** Same as above.
 - **Request Body:**
   ```json
   {
     "userId": "user_id"
   }
+  ```
+
+### Notifications
+
+#### Get Notifications
+- **Endpoint:** `GET /api/notifications`
+- **Headers:**
+  ```
+  Authorization: Bearer <jwt_token>
+  ```
+- **Response:** List of notifications.
+
+#### Mark Notification as Read
+- **Endpoint:** `PUT /api/notifications/:id/read`  
+- **Headers:** Same as above.
+
+- **Response** message
+
+ ```json
+  {
+  "message": "Notification marked as read"
+}
   ```
 
 ### Logs (logs for Complete Information about ongoing tasks)
