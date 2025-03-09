@@ -22,7 +22,12 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(limiter);
-app.use(cors())
+app.use(cors({
+  origin: '*', // Allow requests from any origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  credentials: true
+}));
 
 
 app.use('/api/users', authRoutes);
