@@ -30,7 +30,7 @@ app.use('/api/tasks', taskRoutes);
 app.use('/api/notifications',notificationRoutes)
 
 app.get("/home", (req, res) => {
-  res.send("Welcome to task-manager API, Deployed Successfully using AWS EC2");
+  res.send("Welcome to task-manager API, Deployed Successfully using AWS EC2 instance");
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
