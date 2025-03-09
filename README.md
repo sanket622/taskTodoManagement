@@ -206,8 +206,8 @@ You can then use Postman to test the API.
 
 # Implemented CI/CD pipeline using Github Action to Deploy Project to AWS EC2 i.e automatic Test Build and Deploy to AWS EC2 after every changes commit and merged
 
-- **AWS EC2 Deployed Link** = http://3.110.163.172/api/home/ 
+- **AWS EC2 Deployed API** = http://3.110.163.172/api/home/ 
 
-- **API Example Route** = http://localhost:8080/home/
+- **API Example API** = http://localhost:8080/home/
 
-- **Local Base Route** = http://localhost:8080/
+- **Local Base API** = http://localhost:8080/
