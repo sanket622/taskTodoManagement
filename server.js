@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
@@ -7,6 +8,7 @@ import authRoutes from './src/routes/authRoutes.js';
 import taskRoutes from './src/routes/taskRoutes.js';
 import notificationRoutes from './src/routes/notificationRoutes.js'
 
+app.use(cors({ origin: '*' })); // Allow all origins (for testing)
 dotenv.config();
 const PORT = process.env.PORT || 8080;
 const limiter = rateLimit({
