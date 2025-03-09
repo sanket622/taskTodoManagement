@@ -1,10 +1,7 @@
 # taskTodoManagement
 
-<<<<<<< HEAD
 # Implemented CI/CD pipeline using Github Action to Deploy Project to AWS EC2 i.e automatic Test Build and Deploy to AWS EC2 after every changes commit and merged
 
-=======
->>>>>>> 60d766510a7c8c65bb7f8db39f85ad4dcf4eed27
 # Project Setup and API Testing Guide
 
 ## Prerequisites
