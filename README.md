@@ -208,4 +208,4 @@ You can then use Postman to test the API.
 
 - **AWS EC2 Deployed Link** = http://3.110.163.172/api/home/ 
 
--**API Base Route** = http://localhost:8080/
+- **API Base Route** = http://localhost:8080/
