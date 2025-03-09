@@ -27,7 +27,7 @@ app.use('/api/users', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/notifications',notificationRoutes)
 
-app.get("/", (req, res) => {
+app.get("/home", (req, res) => {
   res.send("Welcome to task-manager API");
 });
 
