@@ -26,6 +26,7 @@ export const createTask = async (req, res) => {
   }
 };
 
+// Pagination is applied to retrieve tasks in a paginated manner based on page and limit query parameters.
 export const getTasks = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;

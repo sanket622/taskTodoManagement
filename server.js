@@ -28,5 +28,8 @@ app.use('/api/users', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/notifications',notificationRoutes)
 
+app.get("/", (req, res) => {
+  res.send("Welcome to E-Commerce API");
+});
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
