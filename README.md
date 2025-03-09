@@ -1,7 +1,5 @@
 # taskTodoManagement
 
-# Implemented CI/CD pipeline using Github Action to Deploy Project to AWS EC2 i.e automatic Test Build and Deploy to AWS EC2 after every changes commit and merged
-
 # Project Setup and API Testing Guide
 
 ## Prerequisites
@@ -204,3 +202,10 @@ You can then use Postman to test the API.
 
 
 - I initialized the project using Docker by running the command docker-compose up -d --build, which started the application on localhost:8080. Instead of manually starting the server with node server.js, I used Docker to manage the containerized environment. The API was then accessed and tested via Postman.We can run the project using either local commands with Docker or by starting the server manually with Node.js.
+
+
+# Implemented CI/CD pipeline using Github Action to Deploy Project to AWS EC2 i.e automatic Test Build and Deploy to AWS EC2 after every changes commit and merged
+
+- **AWS EC2 Deployed Link** = http://3.110.163.172/api/home/ 
+
+-**API Base Route** = http://localhost:8080/
