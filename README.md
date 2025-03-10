@@ -50,6 +50,8 @@ import rateLimit from 'express-rate-limit';
 
 ### Authentication
 
+### Base Route = http://localhost:8080/
+
 #### Register a User
 - **Endpoint:** `POST /api/auth/register`
 - **Request Body:**
