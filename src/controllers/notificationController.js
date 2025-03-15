@@ -16,19 +16,23 @@ redis.on('connect', () => {
 // Cached data is stored for 5 minutes to improve performance.
 export const getNotifications = async (req, res) => {
   try {
-    const cacheKey = `notifications_${req.user.id}`;
+    const cacheKey = req.user.role === 'Admin' ? 'notifications_all' : `notifications_${req.user.id}`;
     const cachedData = await redis.get(cacheKey);
 
     if (cachedData) return res.json(JSON.parse(cachedData));
 
-    const notifications = await Notification.find({ user: req.user.id }).sort({ createdAt: -1 });
+    const query = req.user.role === 'Admin' ? {} : { user: req.user.id };
+
+    const notifications = await Notification.find(query).sort({ createdAt: -1 });
+
     await redis.set(cacheKey, JSON.stringify(notifications), 'EX', 300); // Cache for 5 minutes
 
     res.json(notifications);
   } catch (error) {
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: 'Server error', details: error.message });
   }
 };
+
 
 
 export const markAsRead = async (req, res) => {
