@@ -132,7 +132,7 @@ import rateLimit from 'express-rate-limit';
 - **Response:** Task deleted.
 
 
-#### Assign Task (After assigning a task by Admin , Users will get a notificatio)
+#### Assign Task (After assigning a task by Admin(Only Admin can assign a task) , Users will get a notificatio)
 - **Endpoint:** `POST /api/tasks/assign/:taskId`
 - **Headers:** Same as above.
 - **Request Body:**
